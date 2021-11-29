@@ -1,0 +1,18 @@
+{% extends 'base/layout.html' %}
+
+{% block content %}
+    {% with config=settings.PLUGINS_CONFIG.apbr %}
+        <h2 class="text-center" style="margin-top: 200px">
+            {% if profile %}
+                The {{ profile.name|lower }} says
+                {% if config.loud %}
+                    {{ profile.smell|upper }}!
+                {% else %}
+                    {{ profile.smell }}
+                {% endif %}
+            {% else %}
+                No APBR Profiles have been created yet!
+            {% endif %}
+        </h2>
+    {% endwith %}
+{% endblock %}

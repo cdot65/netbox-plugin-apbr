@@ -4,7 +4,7 @@
 
 ## `Overview`
 
-The goal of this collection is to provide an easier way to manage blueprints within Juniper's Apstra.
+The goal of this collection is to provide an easier way to manage Juniper's APBR policies.
 
 ## 📋 `Netbox version compatibility`
 
