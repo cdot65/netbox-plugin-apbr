@@ -102,8 +102,55 @@ class ApbrBase(ChangeLoggedModel):
         abstract = True
 
 
+class RuleBase(ChangeLoggedModel):
+    """
+    """
+    site = models.ForeignKey(
+        to='dcim.Site',
+        on_delete=models.PROTECT,
+        related_name="%(class)s_related",
+        blank=True,
+        null=True
+    )
+    tenant = models.ForeignKey(
+        to='tenancy.Tenant',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True
+    )
+    status = models.CharField(
+        max_length=50,
+        choices=ApbrStatusChoices,
+        default=ApbrStatusChoices.STATUS_ACTIVE
+    )
+    role = models.ForeignKey(
+        to='ipam.Role',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
+    description = models.CharField(
+        max_length=200,
+        blank=True
+    )
+    match = models.CharField(
+        max_length=200,
+        blank=True
+    )
+    then = models.CharField(
+        max_length=200,
+        blank=True
+    )
+    tags = TaggableManager(through=TaggedItem)
+
+    objects = RestrictedQuerySet.as_manager()
+
+    class Meta:
+        abstract = True
+
+
 @extras_features('custom_fields', 'export_templates', 'webhooks')
-class Apbr(ApbrBase, CustomFieldModel):
+class Apbr(RuleBase, CustomFieldModel):
 
     number = models.PositiveBigIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(4294967295)]
@@ -116,7 +163,7 @@ class Apbr(ApbrBase, CustomFieldModel):
         null=True
     )
 
-    clone_fields = ['description', 'status', 'tenant']
+    # clone_fields = ['description', 'status', 'tenant']
 
     class Meta:
         verbose_name_plural = 'APBR Profiles'

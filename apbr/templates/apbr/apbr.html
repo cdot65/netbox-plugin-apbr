@@ -80,23 +80,32 @@
                         <td>Description</td>
                         <td>{{ object.description|placeholder }}</td>
                     </tr>
+                    <tr>
+                        <td>Match</td>
+                        <td>
+                            {% if object.match %}
+                            <a href="{{ object.match.get_absolute_url }}">{{ object.match }}</a>
+                            {% else %}
+                            <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Then</td>
+                        <td>
+                            {% if object.then %}
+                            <a href="{{ object.then.get_absolute_url }}">{{ object.then }}</a>
+                            {% else %}
+                            <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
         {% plugin_left_page object %}
         {% include 'extras/inc/tags_panel.html' with tags=object.tags.all url='plugins:apbr:apbr_list' %}
         {% include 'inc/custom_fields_panel.html' %}
-    </div>
-    <div class="col-md-8">
-        <div class="card">
-            <h5 class="card-header">
-                Related BGP Sessions
-            </h5>
-            <div class="card-body">
-                {% render_table related_session_table 'inc/table.html' %}
-            </div>
-            {% plugin_right_page object %}
-        </div>
     </div>
     <div class="row">
         <div class="col-md-12">

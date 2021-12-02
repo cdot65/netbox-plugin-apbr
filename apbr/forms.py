@@ -120,7 +120,7 @@ class ApbrForm(BootstrapMixin, CustomFieldModelForm):
     class Meta:
         model = Apbr
         fields = [
-            'number', 'description', 'status', 'site', 'tenant', 'tags',
+            'number', 'description', 'status', 'site', 'tenant', 'tags', 'match', 'then',
         ]
 
 
