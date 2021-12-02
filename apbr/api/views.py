@@ -1,7 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
-from apbr.models import ApbrProfile
-from .serializers import ApbrProfileSerializer
 
-class ApbrProfileViewSet(ModelViewSet):
-    queryset = ApbrProfile.objects.all()
-    serializer_class = ApbrProfileSerializer
+from .serializers import ApbrSerializer
+from apbr.models import Apbr
+from apbr.filters import ApbrFilterSet
+
+
+class ApbrViewSet(ModelViewSet):
+    queryset = Apbr.objects.all()
+    serializer_class = ApbrSerializer
+    filterset_class = ApbrFilterSet

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import ApbrProfile
+from .models import Apbr
 
 
-@admin.register(ApbrProfile)
-class ApbrProfileAdmin(admin.ModelAdmin):
-    list_display = ("name", "smell")
+@admin.register(Apbr)
+class ApbrAdmin(admin.ModelAdmin):
+    fields = ('number', 'status', 'description')

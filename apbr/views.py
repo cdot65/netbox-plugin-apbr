@@ -1,13 +1,42 @@
-from django.shortcuts import render
-from django.views.generic import View
-from .models import ApbrProfile
+from netbox.views import generic
 
-class RandomApbrProfileView(View):
-    """
-    Display a randomly-selected ApbrProfile.
-    """
-    def get(self, request):
-        profile = ApbrProfile.objects.order_by('?').first()
-        return render(request, 'apbr/profile.html', {
-            'profile': profile,
-        })
+from .filters import ApbrFilterSet
+from .models import Apbr
+from .tables import ApbrTable
+from .forms import ApbrFilterForm, ApbrBulkEditForm, ApbrForm
+
+
+class ApbrListView(generic.ObjectListView):
+    queryset = Apbr.objects.all()
+    filterset = ApbrFilterSet
+    filterset_form = ApbrFilterForm
+    table = ApbrTable
+    action_buttons = ()
+    template_name = 'apbr/apbr_list.html'
+
+
+class ApbrView(generic.ObjectView):
+    queryset = Apbr.objects.all()
+    template_name = 'apbr/apbr.html'
+
+
+class ApbrEditView(generic.ObjectEditView):
+    queryset = Apbr.objects.all()
+    model_form = ApbrForm
+    default_return_url = 'plugins:apbr:apbr_list'
+
+
+class ApbrBulkDeleteView(generic.BulkDeleteView):
+    queryset = Apbr.objects.all()
+    table = ApbrTable
+
+
+class ApbrBulkEditView(generic.BulkEditView):
+    queryset = Apbr.objects.all()
+    filterset = ApbrFilterSet
+    table = ApbrTable
+    form = ApbrBulkEditForm
+
+
+class ApbrDeleteView(generic.ObjectDeleteView):
+    queryset = Apbr.objects.all()

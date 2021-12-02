@@ -3,11 +3,17 @@ from utilities.choices import ButtonColorChoices
 
 menu_items = (
     PluginMenuItem(
-        link='plugins:apbr:random_profile',
-        link_text='Random APBR profile',
+        link='plugins:apbr:apbr_list',
+        link_text='APBR Profiles',
+        permissions=['apbr.view_apbr'],
         buttons=(
-            PluginMenuButton('home', 'Button A', 'fa fa-info', ButtonColorChoices.BLUE),
-            PluginMenuButton('home', 'Button B', 'fa fa-warning', ButtonColorChoices.GREEN),
-        )
+            PluginMenuButton(
+                link='plugins:apbr:apbr_add',
+                title='APBR Profiles',
+                icon_class='mdi mdi-plus-thick',
+                color=ButtonColorChoices.GREEN,
+                permissions=['apbr.add_apbr'],
+            ),
+        ),
     ),
 )

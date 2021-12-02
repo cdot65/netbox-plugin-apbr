@@ -1,6 +1,9 @@
 from rest_framework import routers
-from .views import ApbrProfileViewSet
+
+from .views import ApbrViewSet
 
 router = routers.DefaultRouter()
-router.register('profiles', ApbrProfileViewSet)
+router.register('apbr', ApbrViewSet)
+
+
 urlpatterns = router.urls
